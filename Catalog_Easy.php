@@ -19,10 +19,15 @@ if (version_compare(phpversion(), '5.4.0', '<')){
 }
 
 
-class Catalog_Easy{
+class Catalog_Easy extends stdClass{
 
 	public $flag_section;
 	public $sect_options;
+	public $catalog_layout;
+	public $pagedata;
+	public $addlay_folder;
+	public $ShortInfo;
+	public $AbbrevL;
 
 
 	public function __construct($flag_section = "no", $sect_options = ""){
@@ -1973,7 +1978,7 @@ class Catalog_Easy{
 
 
 	function getUrl(){
-		$url = @($_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://' . $_SERVER["SERVER_NAME"];
+		$url = @(isset($_SERVER['HTTPS']) && $_SERVER["HTTPS"] != 'on') ? 'http://' . $_SERVER["SERVER_NAME"] : 'https://' . $_SERVER["SERVER_NAME"];
 		$url .= ($_SERVER["SERVER_PORT"] != 80) ? ":" . $_SERVER["SERVER_PORT"] : "";
 		$url .= $_SERVER["REQUEST_URI"];
 		return $url;
@@ -2286,7 +2291,7 @@ class Catalog_Easy{
 	}
 
 
-	static function MenuPageOptions($title, $title_index, $level_arr = false, $layout_info){
+	static function MenuPageOptions($title, $title_index, $level_arr, $layout_info){
 
 		$langmessage = 'Catalog Easy';
 		$level = $level_arr && isset($level_arr['level']) ? $level_arr['level'] : 'false';
@@ -2316,7 +2321,7 @@ class Catalog_Easy{
 	}
 
 
-	function ShowOptions(){
+	static function ShowOptions(){
 
 		//$pagedata=self::LoadData();
 
@@ -2422,7 +2427,7 @@ class Catalog_Easy{
 
 	}
 
-	function SaveData(){
+	static function SaveData(){
 		global $langmessage, $addonPathData;
 		if (!isset($_REQUEST['index'])){
 			return $langmessage['OOPS'] . ' - nothing to save!';
@@ -2465,7 +2470,7 @@ class Catalog_Easy{
 	}
 
 
-	function LoadData(){
+	static function LoadData(){
 		global $addonPathCode, $addonPathData;
 		$configFile = $addonPathData . '/ec_pagedata.php';
 		if (file_exists($configFile)){

@@ -10,6 +10,14 @@ include_once('Catalog_Easy.php');
 
 class Catalog_nav extends Catalog_Easy{
 
+	public $nav_style;
+	public $another_parent;
+	public $another_menu;
+	public $nav_buttons;
+	public $nav_parent;
+	public $PrevUrl;
+	public $NextUrl;
+
 	function __construct(){
 
 		global $page;

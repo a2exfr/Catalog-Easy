@@ -71,6 +71,8 @@ class Admin_Catalog_Easy{
 	var $readmore_link = 0;
 	var $readmore_text = "";
 
+	public $var_names;
+	public $vers;
 
 	function __construct(){
 		$this->var_names = [
